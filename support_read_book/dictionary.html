@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="web/css/bootstrap.min.css" />
+  </head>
+  <body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <form action="">
+                    <h3 class="text-center">Thêm từ vựng</h3>
+                    <div class="form-group">
+                      <label for="txtEn">English:</label>
+                      <input type="text"
+                        class="form-control" name="txtEn" id="txtEn" aria-describedby="helpId" placeholder="Từ vựng tiếng anh..." />
+                    </div>
+                    <div class="form-group">
+                        <label for="txtVi">VietNamese:</label>
+                        <input type="text"
+                          class="form-control" name="txtVi" id="txtVi" aria-describedby="helpId" placeholder="Thêm giải nghĩa tiếng việt..." />
+                      </div>
+                      <button type="button" onclick="addDictionary()" class="btn btn-outline-primary">Thêm</button>
+                </form>
+            </div>
+            <div class="col-6">
+                list
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addDictionary() {
+            var txtEn = document.getElementById('txtEn').value;
+            var txtVi = document.getElementById('txtVi').value;
+            if(txtEn == "" || txtVi == "") {
+                alert('Nhập nội dung đi đã chứ');
+                return;
+            }
+            var data = {
+                'txtEn': txtEn,
+                'txtVi': txtVi
+            }
+            fetch("http://localhost/www/book-be/dictionary_api.php", {
+                method : 'POST',
+                headers : {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Headers': 'X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding'
+                },
+                crendentials: 'include',
+                mode: 'cors',
+                body: JSON.stringify(data)
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                console.log(data);
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+
+    </script>
+  </body>
+</html>
