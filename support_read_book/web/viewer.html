@@ -417,7 +417,8 @@ See https://github.com/adobe-type-tools/cmap-resources
             return;
           }
           var url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20200229T074029Z.0284d7c5c48d0f47.13e99b9467a5899f3da77110b754fc97cff3c9b5";
-          url += "&text=" + escape(en.value);
+          // url += "&text=" + escape(en.value);
+          url += "&text=" + en.value;
           url += "&lang=en-vi";
           fetch(url)
           .then((response) => {
