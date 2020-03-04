@@ -410,9 +410,26 @@ See https://github.com/adobe-type-tools/cmap-resources
       document.addEventListener('DOMContentLoaded', function() {
         var en = document.getElementById('txtEn');
         var vi = document.getElementById('txtVi');
+
+        // get text được bôi đen
+        document.body.onmouseup = function() {
+          var selection;
+          if (window.getSelection) {
+            selection = window.getSelection();
+          } else if (document.selection) {
+            selection = document.selection.createRange();
+          }
+          // tự động add vào textarea english để nó tự động dịch
+          en.value = selection.toString().trim();
+          translate();
+          if(en.value == "") {
+            vi.value = "";
+          }
+          return;
+        }
+
         vi.style.color = "red";
         vi.style.fontWeight = "bold";
-        vi.style.fontSize = "30px";
 
         en.oninput = translate;
 
