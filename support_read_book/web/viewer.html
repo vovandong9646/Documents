@@ -410,9 +410,13 @@ See https://github.com/adobe-type-tools/cmap-resources
       document.addEventListener('DOMContentLoaded', function() {
         var en = document.getElementById('txtEn');
         var vi = document.getElementById('txtVi');
-        vi.style.color = "black";
+        vi.style.color = "red";
         vi.style.fontWeight = "bold";
-        en.onchange = function() {
+        vi.style.fontSize = "30px";
+
+        en.oninput = translate;
+
+        function translate() {
           if(en.value == "") {
             return;
           }
